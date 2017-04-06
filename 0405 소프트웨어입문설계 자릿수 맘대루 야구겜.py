@@ -63,8 +63,9 @@ def checkStrike() :
         
     if strike == cipher :
         print 'You win. Secret number is ',
-        
-        print secretNumber[:n+1]
+        for i in secretNumber :
+            print i,
+        print
         gameIsDone = True
         
     return strike
