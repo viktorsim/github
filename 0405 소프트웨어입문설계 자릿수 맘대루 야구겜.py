@@ -4,7 +4,8 @@ import random
 
 def getCipher() :
     print 'input the number of cipher.',
-    cipher = int(raw_input())
+    cipher = raw_input()
+    cipher = int(cipher)
     return cipher
 
 def getSecretNumber() :
@@ -35,6 +36,7 @@ def getGuessedNumber() :
         if guess in guessedNumbers :
             print 'You have already guessed that number. Choose another number.'
             print 'Guess numbers : '
+            
         n = 1
         while n != len(str(userNum)) :
             if guess[n] in guess [:n]:
@@ -44,11 +46,12 @@ def getGuessedNumber() :
                 print 'There are repeated numbers. Choose another number.'
                 print 'Guess numbers : ',
             n = n + 1
-        if guess[0] == 0 :
+            
+        if guess[0] == '0' :
             print 'Please enter a ' + str(cipher) + '-cipher number.'
             print 'Guess numbers : ',
-        else :
-            return guess
+
+        return guess
         
 def checkStrike() :
     n = 0
@@ -60,7 +63,8 @@ def checkStrike() :
         
     if strike == cipher :
         print 'You win. Secret number is ',
-        print secretNumber
+        
+        print secretNumber[:n+1]
         gameIsDone = True
         
     return strike
@@ -98,10 +102,12 @@ print secretNumber
 while True :
     guess = getGuessedNumber()
     guessedNumbers.append(guess)
-    strike = checkStrike()
-    if strike == len(str(cipher)) :
-        gameIsDone = True
     ball = checkBall()
+    strike = checkStrike()
+    if strike == cipher :
+        gameIsDone = True
+    else :
+        displayBoard(strike, ball)
 
     if gameIsDone == True :
         if playAgain() :
@@ -111,8 +117,9 @@ while True :
             gameIsDone = False
             cipher = getCipher()
             secretNumber = getSecretNumber()
+            print secretNumber
         else :
             break
         
-    displayBoard(strike, ball)
+
     
